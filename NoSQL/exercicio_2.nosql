@@ -1,0 +1,34 @@
+// Exercício 2 - Consulta 1
+// Quantos livros NÃO estão com status "PUBLISH" e pageCount < 300
+db.books.countDocuments({
+  status: { $ne: "PUBLISH" },
+  pageCount: { $lt: 300 }
+});
+// Resultado esperado: 64
+
+
+// Exercício 2 - Consulta 2
+// Quantos livros contêm MongoDB OU SQL Server no título
+db.books.countDocuments({
+  $or: [
+    { title: { $regex: "MongoDB",    $options: "i" } },
+    { title: { $regex: "SQL Server", $options: "i" } }
+  ]
+});
+// Resultado esperado: 10
+
+
+// Exercício 2 - Consulta 3
+// Quantos livros têm ISBN começando com 18
+db.books.countDocuments({
+  isbn: { $regex: "^18" }
+});
+// Resultado esperado: 47
+
+
+// Exercício 2 - Consulta 4
+// Quantos livros têm JAVA ou Mobile na descrição longa
+db.books.countDocuments({
+  longDescription: { $regex: "java|mobile", $options: "i" }
+});
+// Resultado esperado: 122
